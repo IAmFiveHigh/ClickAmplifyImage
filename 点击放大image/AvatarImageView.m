@@ -22,12 +22,12 @@ static CGRect oldframe;
 + (void)ShowImage:(UIImageView *)avatarImage {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIView *backGroundView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UIImage *image = avatarImage.image;
     backGroundView.backgroundColor = [UIColor blackColor];
     backGroundView.alpha = 0;
     oldframe = [avatarImage convertRect:avatarImage.bounds toView:window];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:oldframe];
     imageView.image = avatarImage.image;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backGroundView addSubview:imageView];
     [window addSubview:backGroundView];
     
@@ -35,8 +35,8 @@ static CGRect oldframe;
     [backGroundView addGestureRecognizer:tap];
     
     [UIView animateWithDuration:0.3 animations:^{
-
-        imageView.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height-image.size.height/image.size.width*[UIScreen mainScreen].bounds.size.width)/2, [UIScreen mainScreen].bounds.size.width, image.size.height/image.size.width*[UIScreen mainScreen].bounds.size.width);
+        
+        imageView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         backGroundView.alpha = 1.0;
     }];
     
@@ -55,12 +55,12 @@ static CGRect oldframe;
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 
 
